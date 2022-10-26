@@ -28,7 +28,7 @@ int main(){
 	
 	FILE *fp;
 	char ch;
-	char nomeArq[] = {"sistema2.txt"};
+	char nomeArq[] = {"sistema1.txt"};
 	
 	fp = fopen(nomeArq,"r");
 	
