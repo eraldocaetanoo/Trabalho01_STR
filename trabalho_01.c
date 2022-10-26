@@ -51,7 +51,7 @@ int main(){
 	}
 	
 	int linhas = qtLinhas, colunas = 3;
-	int matriz[linhas][colunas];
+	//int matriz[linhas][colunas];
 	
 	int p[linhas];
 	int c[linhas];
@@ -140,7 +140,7 @@ int main(){
 		somap = p[i] + somap;
 		somad = d[i] + somad;
 	}
-	// RM (Rate Monotonic)
+
 	
 	double limiarUtilizacaoRM = 0.0;
 	double utilizacao = 0.0;
@@ -151,58 +151,120 @@ int main(){
 	
 	limiarUtilizacaoRM = N*(pow(2,(1.0/N))-1);
 	
-	printf("%lf\n",utilizacao);
-	printf("%lf\n",limiarUtilizacaoRM);
+	//printf("%lf\n",utilizacao);
+	//printf("%lf\n",limiarUtilizacaoRM);
 	
+	printf("\n");
+	printf("<r> RM\n");
+	printf("<d> DM\n");
+	printf("<e> EDF\n");
+	printf("<x> Sair\n");
+
+	char l;
+	printf("Digite a letra da opção desejada:");
+	scanf("%c",&l);
+
 	int escRM = 0;
-	
-	
-	for (int i = 0; i < linhas;i++){
-		if (utilizacao <= limiarUtilizacaoRM || maior(p,linhas) % (p[i]) == 0){
-			escRM = 1;	// escalonavel
-		}
-		else{
-			escRM = 0;	// nao escalonavel
-		}
-	}
-	
-	
-	if (escRM == 1){
-		printf("Escalonavel por RM!\n");
-		
-		
-				
-	}
-	else{
-		printf("Nao escalonavel por RM!\n");
-		//exit(0);
-	}
-	
+	int escDM = 0;
 	int escEDF = 0;
-	
-	for (int i = 0; i < linhas;i++){
-		if (p[i] == d[i] && (utilizacao <= 1.0)){
-			escEDF = 1;	// escalonavel
-		}
-		else if (d[i] < p[i] && (somac/somad) <= 1.0){
-			escEDF = 1;	// escalonavel
-		}
-		else{
-			escEDF = 0;	// nao escalonavel
-			//exit(0);
-		}
-	}
-	
-	if (escEDF == 1){
-		printf("Escalonavel por EDF!\n");
+
+	switch (l){
 		
-		
+		case 'r':
+				////////////////////////////////////////////////////////// RM (Rate Monotonic)
 				
+				for (int i = 0; i < linhas;i++){
+					if (utilizacao <= limiarUtilizacaoRM || maior(p,linhas) % (p[i]) == 0){
+						escRM = 1;	// escalonavel
+					}
+					else{
+						escRM = 0;	// nao escalonavel
+					}
+				}
+				
+				
+				if (escRM == 1){
+					printf("Escalonavel por RM!\n");
+					
+					
+							
+				}
+				else{
+					printf("Nao escalonavel por RM!\n");
+					//exit(0);
+				}
+		break;
+		case 'd':
+				////////////////////////////////////////////////////////// DM (Deadline Monotonic)
+				//int escDM = 0;
+
+				for (int i = 0; i < linhas;i++){
+					if (utilizacao <= limiarUtilizacaoRM || maior(p,linhas) % (p[i]) == 0){
+						escDM = 1;	// escalonavel
+					}
+					else{
+						escDM = 0;	// nao escalonavel
+					}
+				}
+				
+				
+				if (escDM == 1){
+					printf("Escalonavel por DM!\n");
+					
+					
+							
+				}
+				else{
+					printf("Nao escalonavel por DM!\n");
+					//exit(0);
+				}
+		break;
+		case 'e':
+				////////////////////////////////////////////////////////// EDF (Earliest Deadline First)
+				//int escEDF = 0;
+				
+				for (int i = 0; i < linhas;i++){
+					if (p[i] == d[i] && (utilizacao <= 1.0)){
+						escEDF = 1;	// escalonavel
+					}
+					else if (d[i] < p[i] && (somac/somad) <= 1.0){
+						escEDF = 1;	// escalonavel
+					}
+					else{
+						escEDF = 0;	// nao escalonavel
+						//exit(0);
+					}
+				}
+				
+				if (escEDF == 1){
+					printf("Escalonavel por EDF!\n");
+					
+					
+							
+				}
+				else{
+					printf("Nao escalonavel por EDF!\n");
+					//exit(0);
+				}
+				
+				
+		break;
+		case 'x':
+				exit(0);
+		break;
+		default :
+				printf("Letra inválida\n");	
+
 	}
-	else{
-		printf("Nao escalonavel por EDF!\n");
-		//exit(0);
-	}
+
+
+
+
+
+	
+	
+	
+
 	
 	
 	fflush(stdin);
