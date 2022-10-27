@@ -28,7 +28,7 @@ int main(){
 	
 	FILE *fp;
 	char ch;
-	char nomeArq[] = {"sistema1.txt"};
+	char nomeArq[] = {"sistema4.txt"};
 	
 	fp = fopen(nomeArq,"r");
 	
@@ -115,9 +115,9 @@ int main(){
 	
 	//printf("%lf\n",utilizacao);
 	//printf("%lf\n",limiarUtilizacaoRM);
-	char l;
+	char letra;
 
-	do{
+	//do{
 		
 		for (int i = 0; i < linhas;i++){
 			printf("T%d\tP= %d\tC= %d\tD= %d\n",i+1,p[i],c[i],d[i]);  //////MOSTRANDO OS DADOS DO ARQUIVO .TXT
@@ -143,13 +143,13 @@ int main(){
 		printf("<x> Sair\n");
 
 		printf("Digite a letra da opção desejada: ");
-		scanf("%c",&l);
+		scanf("%c",&letra);
 
 		int escRM = 0;
 		int escDM = 0;
 		int escEDF = 0;
 
-		switch (l){
+		switch (letra){
 			
 			case 'r':
 					////////////////////////////////////////////////////////// RM (Rate Monotonic)
@@ -234,10 +234,10 @@ int main(){
 					exit(0);
 			break;
 			default :
-					printf("\nLetra inválida\n\n\n");	
+					printf("\nLetra inválida!\n\n\n");	
 
 		}
-	} while (l != 'r' && l != 'd' && l != 'e' && l != 'x');
+	//} while (l != 'r' && l != 'd' && l != 'e' && l != 'x');
 
 	
 	fflush(stdin);
